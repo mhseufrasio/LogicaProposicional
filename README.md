@@ -1,0 +1,2 @@
+# LogicaProposicional
+Resolução de proposições
