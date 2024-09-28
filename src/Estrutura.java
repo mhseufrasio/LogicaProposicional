@@ -20,7 +20,6 @@ public class Estrutura {
     private ArrayList<String[]> funcoes = new ArrayList<String[]>();
     private ArrayList<List> predicados = new ArrayList<List>();
     private ArrayList<String> interpretacao = new ArrayList<String>();
-    private List<String> termos_depend = new ArrayList();
     private List<String> variaveis = new ArrayList();
     private List<String> variaveisValores = new ArrayList();
     private boolean permissao = false;
