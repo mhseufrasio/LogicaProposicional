@@ -27,7 +27,7 @@ public class Estrutura {
     public Estrutura(String[] dominio){
         this.dom = dominio;
     }
-//cria uma funcao para todos os valores possiveis baseados no dominio  
+    //cria uma funcao para todos os valores possiveis baseados no dominio  
     public void criarFuncao(String nome, int aridade){
         int tamanhoFunc = (int)Math.pow(dom.length,aridade)+1;
         String[] funcao = new String[tamanhoFunc];
@@ -47,29 +47,6 @@ public class Estrutura {
             }
             auxiliarAridade++;
         }
-//        int i = 0;
-//        while(i<aridade){
-//            int a = 1,j = 0;
-//            while(a<=Math.pow(dom.length,aridade)){
-//                if(i == 0){
-//                    funcao[a] = "";
-//                }
-//                if(i+1 == aridade){
-//                    funcao[a] = funcao[a]+dom[j];
-//                }else{
-//                    funcao[a] = funcao[a]+dom[j]+",";
-//                }
-//                if(a%Math.pow(dom.length,aridade-i-1) == 0){
-//                    if(dom[j].equals(dom[dom.length-1])){
-//                        j=0;
-//                    }else{
-//                        j++;
-//                    }
-//                }
-//                a++;
-//            }
-//            i++;
-//        }
         funcoes.add(funcao);
     }
 //cria uma variavel e adiciona na lista de variaveis e de interpretacao
@@ -148,7 +125,7 @@ public class Estrutura {
             }
         }
     }
-    
+
     private void imprimirPredicados(){
         int a,b=0;
         while(b < predicados.size()){
@@ -168,7 +145,7 @@ public class Estrutura {
             b++;
         }
     }
-    
+
 //imprime todas as constantes com seus valores de forma ordenada
     private void imprimirConstantes(){
         Iterator i = consts.iterator();
