@@ -27,7 +27,7 @@ public class Estrutura {
     public Estrutura(String[] dominio){
         this.dom = dominio;
     }
-    //cria uma funcao para todos os valores possiveis baseados no dominio  
+//cria uma funcao para todos os valores possiveis baseados no dominio  
     public void criarFuncao(String nome, int aridade){
         int tamanhoFunc = (int)Math.pow(dom.length,aridade)+1;
         String[] funcao = new String[tamanhoFunc];
@@ -195,7 +195,7 @@ public class Estrutura {
     
     public void interpretarTermo(String string){
         if(contar(string)){
-            String mensagem = interpretaTermo(this.interpretacao,string);
+            String mensagem = interpretaTermo(string);
             if(mensagem == null){
                 System.out.println("Ha uma falha no termo.");
             }else{
@@ -207,7 +207,7 @@ public class Estrutura {
     }
     
 //usa a interpretacao da estrutura para 'resolver' o termo
-    private String interpretaTermo(ArrayList<String> interpretacao, String termo){
+    private String interpretaTermo(String termo){
         String e = null;
 //se houver funcoes no termo
         if(termo.split("\\(").length >= 2){
@@ -222,10 +222,10 @@ public class Estrutura {
                     while(a<b.length){
                         permissao = false;
                         if(contar(b[a])){
-                            resultado = resultado + interpretaTermo(interpretacao, b[a])+",";
+                            resultado = resultado + interpretaTermo(b[a])+",";
                             termoFormado = "";
                         }else if(contar(termoFormado)){
-                            resultado = resultado + interpretaTermo(interpretacao, termoFormado.substring(0,termoFormado.length()-1))+",";
+                            resultado = resultado + interpretaTermo(termoFormado.substring(0,termoFormado.length()-1))+",";
                             termoFormado = "";
                         }else{
                             termoFormado = termoFormado + b[a]+",";
@@ -238,7 +238,7 @@ public class Estrutura {
                     a = 0;
                     if((resultado != "" && contar(termoFormado)) || contar(termoFormado)){
                         termoFormado = termoFormado.substring(0,termoFormado.length()-1);
-                        resultado = resultado + interpretaTermo(interpretacao, termoFormado);
+                        resultado = resultado + interpretaTermo(termoFormado);
                     }else if(resultado != "" && !contar(termoFormado)){
                         resultado = resultado.substring(0,resultado.length()-1);
                     }
@@ -387,16 +387,16 @@ seguindo a logica de que um termo completo possui o mesmo numero de parenteses a
         }
     }
     
-    public boolean interpretaFormula(ArrayList<String> interpretacao, String formula){
+    public boolean interpretaFormula(String formula){
         boolean resposta = false;
         if(contar(formula)){
             if(descobrirParametros(" implica ", formula).size() > 1){
                 List<String> implica = descobrirParametros(" implica ", formula);
-                boolean dois = interpretaFormula(interpretacao, implica.get(1));
+                boolean dois = interpretaFormula(implica.get(1));
                 if(dois){
                         resposta = true;
                 }else{
-                    boolean um = interpretaFormula(interpretacao,implica.get(0));
+                    boolean um = interpretaFormula(implica.get(0));
                     if(!um){
                         resposta = true;
                     }
@@ -406,14 +406,14 @@ seguindo a logica de que um termo completo possui o mesmo numero de parenteses a
                 int i = 0;
                 resposta = true;
                 while(i<e.size() && resposta){
-                    resposta = interpretaFormula(interpretacao, e.get(i));
+                    resposta = interpretaFormula(e.get(i));
                     i++;
                 }
             }else if(descobrirParametros(" ou ", formula).size() > 1){
                 List<String> ou = descobrirParametros(" ou ", formula);
                 int i = 0;
                 while(i<ou.size() && !resposta){
-                    resposta = interpretaFormula(interpretacao, ou.get(i));
+                    resposta = interpretaFormula(ou.get(i));
                     i++;
                 }
             }else if(!formula.split("\\(")[0].equals("")){
@@ -435,12 +435,12 @@ seguindo a logica de que um termo completo possui o mesmo numero de parenteses a
                         String valorAnterior = variaveisValores.get(variaveis.indexOf(vari));
                         while(a < dom.length && resposta){
                             variaveisValores.set(variaveis.indexOf(vari),vari+":"+dom[a]);
-                            resposta = interpretaFormula(interpretacao, formula.substring(formula.split("\\(")[0].length() + 1,formula.length()-1));
+                            resposta = interpretaFormula(formula.substring(formula.split("\\(")[0].length() + 1,formula.length()-1));
                             a++;
                         }
                         variaveisValores.set(variaveis.indexOf(vari),valorAnterior);
                     }else{
-                        resposta = interpretaFormula(interpretacao, formula.substring(formula.split("\\(")[0].length() + 1,formula.length()-1));
+                        resposta = interpretaFormula(formula.substring(formula.split("\\(")[0].length() + 1,formula.length()-1));
                     }
                 }else if(formula.split("\\(")[0].split("existe ").length > 1){
                     resposta = false;
@@ -460,15 +460,15 @@ seguindo a logica de que um termo completo possui o mesmo numero de parenteses a
                         String valorAnterior = variaveisValores.get(variaveis.indexOf(vari));
                         while(a < dom.length && !resposta){
                             variaveisValores.set(variaveis.indexOf(vari),vari+":"+dom[a]);
-                            resposta = interpretaFormula(interpretacao, formula.substring(formula.split("\\(")[0].length() + 1,formula.length()-1));
+                            resposta = interpretaFormula(formula.substring(formula.split("\\(")[0].length() + 1,formula.length()-1));
                             a++;
                         }
                         variaveisValores.set(variaveis.indexOf(vari),valorAnterior);
                     }else{
-                        resposta = interpretaFormula(interpretacao, formula.substring(formula.split("\\(")[0].length() + 1,formula.length()-1));
+                        resposta = interpretaFormula(formula.substring(formula.split("\\(")[0].length() + 1,formula.length()-1));
                     }
                 }else if(formula.split("\\(")[0].equals("nao")){
-                    resposta = !interpretaFormula(interpretacao, formula.substring(formula.split("\\(")[0].length() + 1,formula.length()-1));
+                    resposta = !interpretaFormula(formula.substring(formula.split("\\(")[0].length() + 1,formula.length()-1));
                 }else{
                     Integer i = consultarPredicados(formula.split("\\(")[0]);
                     if(i != null){
@@ -479,7 +479,7 @@ seguindo a logica de que um termo completo possui o mesmo numero de parenteses a
                             if(aridade > 1){
                                 String resultado = "";
                                 while(a < termos.size()){
-                                    resultado = resultado + interpretaTermo(interpretacao, termos.get(a));
+                                    resultado = resultado + interpretaTermo(termos.get(a));
                                     if(a+1 < termos.size()){
                                         resultado = resultado + ",";
                                     }
@@ -489,7 +489,7 @@ seguindo a logica de que um termo completo possui o mesmo numero de parenteses a
                                     resposta = true;
                                 }
                             }else{
-                                String termo_unario = interpretaTermo(interpretacao, formula.substring(formula.split("\\(")[0].length()+1,formula.length()-1));
+                                String termo_unario = interpretaTermo(formula.substring(formula.split("\\(")[0].length()+1,formula.length()-1));
                                 if(termo_unario.isEmpty()){
                                     System.out.println("Erro na formula.");
                                     exit(0);
@@ -508,7 +508,7 @@ seguindo a logica de que um termo completo possui o mesmo numero de parenteses a
                     }
                 }
             }else{
-                resposta = interpretaFormula(interpretacao, formula.substring(1,formula.length()-1));
+                resposta = interpretaFormula(formula.substring(1,formula.length()-1));
             }
         }else{
             System.out.println("Formula incorreta.");
@@ -546,9 +546,5 @@ seguindo a logica de que um termo completo possui o mesmo numero de parenteses a
             variaveis.add(variavel);
             variaveisValores.add(variavel);
         }
-    }
-    
-    public ArrayList<String> getInterpretacao() {
-        return interpretacao;
     }
 }

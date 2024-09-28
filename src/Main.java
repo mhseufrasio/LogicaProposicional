@@ -4,6 +4,10 @@
  * and open the template in the editor.
  */
 
+/**
+ *
+ * @author PC
+ */
 public class Main {
 
     /**
@@ -36,11 +40,11 @@ public class Main {
         a.inserirValorPredicado("P(1,2)");
         a.inserirValorPredicado("P(2,1)");
         a.inserirValorPredicado("P(1,3)");
-        System.out.println(a.interpretaFormula(a.getInterpretacao(), "F(c)"));
-        System.out.println(a.interpretaFormula(a.getInterpretacao(), "F(c) e P(d,c)"));
-        System.out.println(a.interpretaFormula(a.getInterpretacao(), "F(c) e F(d)"));
-        System.out.println(a.interpretaFormula(a.getInterpretacao(), "nao(F(c))"));
-        System.out.println(a.interpretaFormula(a.getInterpretacao(), "para todo x(existe y(P(y,x)))"));
+        System.out.println(a.interpretaFormula("F(c)"));
+        System.out.println(a.interpretaFormula("F(c) e P(d,c)"));
+        System.out.println(a.interpretaFormula("F(c) e F(d)"));
+        System.out.println(a.interpretaFormula("nao(F(c))"));
+        System.out.println(a.interpretaFormula("para todo x(existe y(P(y,x)))"));
         a.imprimirEstrutura();
     }
 }
