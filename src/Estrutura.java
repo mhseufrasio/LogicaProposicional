@@ -215,7 +215,6 @@ public class Estrutura {
                     String resultado = "",termoFormado="";
                     int a = 0;
                     String[] b = termo.substring(termo.split("\\(")[0].length()+1,termo.length()-1).split(",");
-                    boolean auxiliar = false;
                     while(a<b.length){
                         if(contar(b[a])){
                             resultado = resultado + interpretaTermo(b[a])+",";
@@ -229,25 +228,23 @@ public class Estrutura {
                         a++;
                     }
                     a = 0;
-                    if((resultado != "" && contar(termoFormado)) || contar(termoFormado)){
+                    if(contar(termoFormado)){
                         termoFormado = termoFormado.substring(0,termoFormado.length()-1);
                         resultado = resultado + interpretaTermo(termoFormado);
-                    }else if(resultado != "" && !contar(termoFormado)){
+                    }else if(resultado != ""){
                         resultado = resultado.substring(0,resultado.length()-1);
                     }
-                    if(!auxiliar){
-                        while(a<string.length){
-                            if(string[a].split(":")[0].equals(resultado)){
-                                if(string[a].split(":").length != 1){
-                                    e = string[a].split(":")[1];
-                                    break;
-                                }else{
-                                    System.out.println("Valor da funcao "+string[0]+"("+resultado+ ") nao definida.");
-                                    exit(0);
-                                }
+                    while(a<string.length){
+                        if(string[a].split(":")[0].equals(resultado)){
+                            if(string[a].split(":").length != 1){
+                                e = string[a].split(":")[1];
+                                break;
+                            }else{
+                                System.out.println("Valor da funcao "+string[0]+"("+resultado+ ") nao definida.");
+                                exit(0);
                             }
-                            a++;
                         }
+                        a++;
                     }
                 }
             }
