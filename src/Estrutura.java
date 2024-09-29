@@ -15,10 +15,10 @@ import java.util.List;
  */
 public class Estrutura {
     private String[] dom;
-    private ArrayList<String> consts = new ArrayList<String>();
-    private ArrayList<String[]> funcoes = new ArrayList<String[]>();
-    private ArrayList<List> predicados = new ArrayList<List>();
-    private ArrayList<String> interpretacao = new ArrayList<String>();
+    private List<String> consts = new ArrayList<String>();
+    private List<String[]> funcoes = new ArrayList<String[]>();
+    private List<List> predicados = new ArrayList<List>();
+    private List<String> interpretacao = new ArrayList<String>();
     private List<String> variaveis = new ArrayList();
     private List<String> variaveisValores = new ArrayList();
     private boolean permissao = false;
