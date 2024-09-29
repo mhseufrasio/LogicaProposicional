@@ -21,7 +21,6 @@ public class Estrutura {
     private List<String> interpretacao = new ArrayList<String>();
     private List<String> variaveis = new ArrayList();
     private List<String> variaveisValores = new ArrayList();
-    private boolean permissao = false;
     
     public Estrutura(String[] dominio){
         this.dom = dominio;
@@ -218,7 +217,6 @@ public class Estrutura {
                     String[] b = termo.substring(termo.split("\\(")[0].length()+1,termo.length()-1).split(",");
                     boolean auxiliar = false;
                     while(a<b.length){
-                        permissao = false;
                         if(contar(b[a])){
                             resultado = resultado + interpretaTermo(b[a])+",";
                             termoFormado = "";
@@ -229,9 +227,6 @@ public class Estrutura {
                             termoFormado = termoFormado + b[a]+",";
                         }
                         a++;
-                        if(permissao){
-                            auxiliar = true;
-                        }
                     }
                     a = 0;
                     if((resultado != "" && contar(termoFormado)) || contar(termoFormado)){
@@ -239,9 +234,6 @@ public class Estrutura {
                         resultado = resultado + interpretaTermo(termoFormado);
                     }else if(resultado != "" && !contar(termoFormado)){
                         resultado = resultado.substring(0,resultado.length()-1);
-                    }
-                    if(permissao){
-                            auxiliar = true;
                     }
                     if(!auxiliar){
                         while(a<string.length){
@@ -290,7 +282,7 @@ public class Estrutura {
                     }
                 }
             }
-            if(e == null && !permissao){
+            if(e == null){
                 System.out.println("Erro no termo.");
                 exit(0);
             }else{
