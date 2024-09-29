@@ -15,7 +15,6 @@ import java.util.List;
  */
 public class Estrutura {
     private String[] dom;
-    private ArrayList<String> vars = new ArrayList<String>();
     private ArrayList<String> consts = new ArrayList<String>();
     private ArrayList<String[]> funcoes = new ArrayList<String[]>();
     private ArrayList<List> predicados = new ArrayList<List>();
@@ -51,7 +50,6 @@ public class Estrutura {
     }
 //cria uma variavel e adiciona na lista de variaveis e de interpretacao
     public void criarVariavel(String x) {
-        vars.add(x);
         interpretacao.add(x);
     }
 //cria uma constante valorada e adiciona na lista de constantes
