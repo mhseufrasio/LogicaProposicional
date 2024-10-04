@@ -30,22 +30,27 @@ public class Estrutura {
         int tamanhoFunc = (int)Math.pow(dom.length,aridade)+1;
         String[] funcao = new String[tamanhoFunc];
         funcao[0] = nome;
-        int auxiliarAridade = 0, indice = 1, auxiliar = 0;
-        while(auxiliarAridade < aridade){
-            indice = 1;
-            while(indice<tamanhoFunc){
-                if(auxiliarAridade>0){
-                    funcao[indice] = funcao[indice]+",";
-                }else{
-                    funcao[indice] = "";
-                }
-                auxiliar = (indice-1)%(int)Math.pow(dom.length,aridade - auxiliarAridade);
-                funcao[indice] = funcao[indice]+dom[(auxiliar/((int)Math.pow(dom.length,aridade - auxiliarAridade)/dom.length))];
-                indice++;
-            }
-            auxiliarAridade++;
+        List<String> args = new ArrayList<String>();
+        gerarArranjos(aridade, args, 0, "");
+        int i = 1;
+        while(i < tamanhoFunc){
+            funcao[i] = args.get(i - 1);
+            i++;
         }
         funcoes.add(funcao);
+    }
+
+//gera arranjos com repetição de elementos do domínio
+    public void gerarArranjos(int aridade, List<String> resultado, int nivel, String atual) {
+        if (nivel == aridade) {
+            resultado.add(atual);
+            return;
+        }
+
+        for (String elemento : dom) {
+            String aux = nivel == 0 ? elemento : atual + "," + elemento;
+            gerarArranjos(aridade, resultado, nivel + 1, aux);
+        }
     }
 
 //cria uma variável e adiciona na interpretação
