@@ -25,7 +25,7 @@ public class Estrutura {
     public Estrutura(String[] dominio){
         this.dom = dominio;
     }
-//cria uma funcao para todos os valores possiveis baseados no dominio  
+//cria uma função para todos os valores possíveis baseados no domínio  
     public void criarFuncao(String nome, int aridade){
         int tamanhoFunc = (int)Math.pow(dom.length,aridade)+1;
         String[] funcao = new String[tamanhoFunc];
@@ -47,7 +47,8 @@ public class Estrutura {
         }
         funcoes.add(funcao);
     }
-//cria uma variavel e adiciona na lista de variaveis e de interpretacao
+
+//cria uma variável e adiciona na interpretação
     public void criarVariavel(String x) {
         interpretacao.add(x);
     }
@@ -63,7 +64,7 @@ public class Estrutura {
             lista.add(aridade);
             predicados.add(lista);
         }else{
-            System.out.println("Ja existe um predicado com este nome.");
+            System.out.println("Já existe um predicado com este nome.");
         }
     }
 //imprime a estrutura de forma ordenada
@@ -84,7 +85,7 @@ public class Estrutura {
         imprimirConstantes();
         System.out.println("}");
     }
-//imprime o dominio da estrutura de forma ordenada
+//imprime o domínio da estrutura de forma ordenada
     private void imprimirDom(){
         System.out.print("dom:[");
         int i = 0;
@@ -98,7 +99,7 @@ public class Estrutura {
         }
         System.out.print("]");
     }
-//imprime todas as funcoes de forma ordenada
+//imprime todas as funções de forma ordenada
     private void imprimirFuncoes(){
         Iterator interator = funcoes.iterator();
         while(interator.hasNext()){
@@ -156,25 +157,22 @@ public class Estrutura {
             a++;
         }
     }
-    
-   /* public imprimirVariaveis(){
-        
-    }*/
-//recebe uma funcao de um elemento e um valor para ela
+
+//recebe uma função de um elemento e um valor para ela
     public void inserirValor(String string, int valor){
         if(consultarDominio(""+valor)){
-//caso a funcao seja I, interpreta-se como sendo a funcao interpretacao
+//caso a função seja I, interpreta-se como sendo a função interpretação
             if(string.split("\\(")[0].equals("I")){
                 inserirValorInterpretacao(string, valor);
                 return;
             }
             Iterator i = funcoes.iterator();
-//checa os nomes da funcoes ate achar a funcao do termo
+//checa os nomes da funções até achar a função do termo
             while(i.hasNext()){
                 String[] str = (String[])i.next();
                 if(str[0].equals(string.split("\\(")[0])){
                     int a = 1;
-//depois de achar o nome da funcao, procura o termo para adicionar o valor
+//depois de achar o nome da função, procura o termo para atribuir o valor
                     while(a<str.length){
                         if(string.split("\\(")[1].split("\\)")[0].equals(str[a].split(":")[0])){
                            str[a]=str[a].split(":")[0]+":"+valor;
@@ -186,7 +184,7 @@ public class Estrutura {
                 }
             }
         }else{
-            System.out.println("Valor fora do dominio da estrutura.");
+            System.out.println("Valor fora do domínio da estrutura.");
         }
     }
     
@@ -194,19 +192,19 @@ public class Estrutura {
         if(contar(string)){
             String mensagem = interpretaTermo(string);
             if(mensagem == null){
-                System.out.println("Ha uma falha no termo.");
+                System.out.println("Há uma falha no termo.");
             }else{
                 System.out.println(mensagem);
             }
         }else{
-            System.out.println("Ha uma falha no termo.");
+            System.out.println("Há uma falha no termo.");
         }
     }
     
-//usa a interpretacao da estrutura para 'resolver' o termo
+//usa a interpretação da estrutura para 'resolver' o termo
     private String interpretaTermo(String termo){
         String e = null;
-//se houver funcoes no termo
+//se houver funções no termo
         if(termo.split("\\(").length >= 2){
             Iterator i = funcoes.iterator();
             while(i.hasNext()){
@@ -240,7 +238,7 @@ public class Estrutura {
                                 e = string[a].split(":")[1];
                                 break;
                             }else{
-                                System.out.println("Valor da funcao "+string[0]+"("+resultado+ ") nao definida.");
+                                System.out.println("Valor do termo "+string[0]+"("+resultado+") não está definido.");
                                 exit(0);
                             }
                         }
@@ -249,7 +247,7 @@ public class Estrutura {
                 }
             }
         }else if(termo.split("\\(").length == 1){
-//se houver somente constantes e/ou variaveis
+//se houver somente constantes e/ou variáveis
             Iterator i = variaveisValores.iterator();
             if(variaveis.contains(termo)){
                 if(variaveisValores.get(variaveis.indexOf(termo)).split(":").length > 1){
@@ -271,7 +269,7 @@ public class Estrutura {
                 String inter = (String)i.next();
                 if(inter.split(":")[0].equals(termo)){
                     if(inter.split(":").length == 1){
-                        System.out.println("A interpretacao de "+termo+" nao foi preenchida");
+                        System.out.println("A interpretação de "+termo+" não foi definida.");
                         exit(0);
                     }else{
                         e = inter.split(":")[1];
@@ -302,8 +300,8 @@ public class Estrutura {
     }
 /*
 conta quantos '(' e quantos ')' tem na string
-serve pra saber se a string é um temo completo ou apenas parte dele
-seguindo a logica de que um termo completo possui o mesmo numero de parenteses abertos e fechados
+serve pra saber se a string é um termo completo ou apenas parte dele
+seguindo a lógica de que um termo completo possui o mesmo número de parenteses abertos e fechados
 */
     private boolean contar(String string){
         boolean result = false;
@@ -321,7 +319,7 @@ seguindo a logica de que um termo completo possui o mesmo numero de parenteses a
         }
         return result;
     }
-//checa se o valor escolhido pertece ao dominio da estrutura
+//checa se o valor escolhido pertece ao domínio da estrutura
     private boolean consultarDominio(String valor){
         int a = 0;
         while(a<dom.length){
@@ -364,10 +362,10 @@ seguindo a logica de que um termo completo possui o mesmo numero de parenteses a
                 if(consultarValorPredicado(predicado.substring(predicado.split("\\(")[0].length()+1,predicado.length()-1),i) == null){
                     predicados.get(i).add(predicado.substring(predicado.split("\\(")[0].length()+1,predicado.length()-1));
                 }else{
-                    System.out.println("Este valor ja esta no predicado.");
+                    System.out.println("Este valor já está no predicado.");
                 }
             }else{
-                System.out.println("O predicado nao existe ou a aridade esta incorreta.");
+                System.out.println("O predicado não existe ou a aridade esta incorreta.");
             }
         }else{
             System.out.println("Digite o predicado corretamente.");
@@ -478,7 +476,7 @@ seguindo a logica de que um termo completo possui o mesmo numero de parenteses a
                             }else{
                                 String termo_unario = interpretaTermo(formula.substring(formula.split("\\(")[0].length()+1,formula.length()-1));
                                 if(termo_unario.isEmpty()){
-                                    System.out.println("Erro na formula.");
+                                    System.out.println("Erro na fórmula.");
                                     exit(0);
                                 }
                                 if(consultarValorPredicado(termo_unario,i) != null){
@@ -486,11 +484,11 @@ seguindo a logica de que um termo completo possui o mesmo numero de parenteses a
                                 }
                             }
                         }else{
-                            System.out.println("Formula incorreta.");
+                            System.out.println("Fórmula incorreta.");
                             exit(0);
                         }
                     }else{
-                        System.out.println("Formula incorreta.");
+                        System.out.println("Fórmula incorreta.");
                         exit(0);
                     }
                 }
@@ -498,7 +496,7 @@ seguindo a logica de que um termo completo possui o mesmo numero de parenteses a
                 resposta = interpretaFormula(formula.substring(1,formula.length()-1));
             }
         }else{
-            System.out.println("Formula incorreta.");
+            System.out.println("Fórmula incorreta.");
             exit(0);
         }
         return resposta;
