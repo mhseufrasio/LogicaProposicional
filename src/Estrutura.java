@@ -370,7 +370,7 @@ seguindo a lógica de que um termo completo possui o mesmo número de parenteses
                     System.out.println("Este valor já está no predicado.");
                 }
             }else{
-                System.out.println("O predicado não existe ou a aridade esta incorreta.");
+                System.out.println("O predicado não existe ou a aridade está incorreta.");
             }
         }else{
             System.out.println("Digite o predicado corretamente.");
