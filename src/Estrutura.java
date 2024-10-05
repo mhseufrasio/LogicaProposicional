@@ -41,7 +41,7 @@ public class Estrutura {
     }
 
 //gera arranjos com repetição de elementos do domínio
-    public void gerarArranjos(int aridade, List<String> resultado, int nivel, String atual) {
+    private void gerarArranjos(int aridade, List<String> resultado, int nivel, String atual) {
         if (nivel == aridade) {
             resultado.add(atual);
             return;
